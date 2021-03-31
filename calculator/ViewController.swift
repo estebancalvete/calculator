@@ -8,6 +8,16 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    // Variables
+    var variable = 0
+    
+    
+    // Funciones
+    
+    func ejectuar() {
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
