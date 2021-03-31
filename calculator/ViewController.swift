@@ -11,10 +11,12 @@ class ViewController: UIViewController {
     
     // Variables
     var variable = 0
-    
+    let number2 = 1
     
     // Funciones
-    
+    func exit() {
+        
+    }
     func ejectuar() {
         
     }
