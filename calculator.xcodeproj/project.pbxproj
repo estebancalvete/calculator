@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5BA4630A2618DAC90054B85E /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA463092618DAC90054B85E /* UIButtonExtension.swift */; };
+		5BA4630A2618DAC90054B85E /* UIButton+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA463092618DAC90054B85E /* UIButton+Additions.swift */; };
 		5BE194A52614C61200638DDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE194A42614C61200638DDC /* AppDelegate.swift */; };
 		5BE194A72614C61200638DDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE194A62614C61200638DDC /* SceneDelegate.swift */; };
 		5BE194A92614C61200638DDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE194A82614C61200638DDC /* ViewController.swift */; };
@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5BA463092618DAC90054B85E /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		5BA463092618DAC90054B85E /* UIButton+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Additions.swift"; sourceTree = "<group>"; };
 		5BE194A12614C61200638DDC /* calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BE194A42614C61200638DDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BE194A62614C61200638DDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 				5BE194AD2614C61600638DDC /* Assets.xcassets */,
 				5BE194AF2614C61600638DDC /* LaunchScreen.storyboard */,
 				5BE194B22614C61600638DDC /* Info.plist */,
-				5BA463092618DAC90054B85E /* UIButtonExtension.swift */,
+				5BA463092618DAC90054B85E /* UIButton+Additions.swift */,
 			);
 			path = calculator;
 			sourceTree = "<group>";
@@ -141,7 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BE194A92614C61200638DDC /* ViewController.swift in Sources */,
-				5BA4630A2618DAC90054B85E /* UIButtonExtension.swift in Sources */,
+				5BA4630A2618DAC90054B85E /* UIButton+Additions.swift in Sources */,
 				5BE194A52614C61200638DDC /* AppDelegate.swift in Sources */,
 				5BE194A72614C61200638DDC /* SceneDelegate.swift in Sources */,
 			);
