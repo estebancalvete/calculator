@@ -11,8 +11,8 @@ class ViewController: UIViewController {
     
     // MARK: Variables
     
-    var total: Double = 0
-    var temp: Double = 0
+    var total: Int = 0
+    var temp: Int = 0
     var operating = false
     var decimal = false
     var operation:OperationType = .none
@@ -28,26 +28,6 @@ class ViewController: UIViewController {
         case none, addiction, substraction, multiplication, division, percent
     }
     
-    let auxFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        let locale = Locale.current
-        formatter.groupingSeparator = ""
-        formatter.decimalSeparator = locale.decimalSeparator
-        formatter.numberStyle = .decimal
-        return formatter
-    } ()
-    
-    let printFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        let locale = Locale.current
-        formatter.groupingSeparator = locale.groupingSeparator
-        formatter.decimalSeparator = locale.decimalSeparator
-        formatter.numberStyle = .decimal
-        formatter.maximumIntegerDigits = 9
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 8
-        return formatter
-    } ()
     
     // MARK: IBOutlets
 
@@ -112,99 +92,9 @@ class ViewController: UIViewController {
 
     // MARK: Functions
     
-    // MARK: IBActions
-
-    @IBAction func resultButtonDidTouchUpInside(_ sender: UIButton) {
-        result()
-        sender.shine()
-    }
-    @IBAction func plusButtonDidTouchUpInside(_ sender: UIButton) {
-        result()
-        operating = true
-        operation = .addiction
-        sender.shine()
-    }
-    @IBAction func minusButtonDidTouchUpInside(_ sender: UIButton) {
-        result()
-        operating = true
-        operation = .substraction
-        sender.shine()
-    }
-    @IBAction func multiplyButtonDidTouchUpInside(_ sender: UIButton) {
-        result()
-        operating = true
-        operation = .multiplication
-        sender.shine()
-    }
-    @IBAction func divideButtonDidTouchUpInside(_ sender: UIButton) {
-        result()
-        operating = true
-        operation = .division
-        sender.shine()
-    }
-    @IBAction func percentButtonDidTouchUpInside(_ sender: UIButton) {
-        if operation != .percent {
-            result()
-        }
-        operating = true
-        operation = .percent
-        result()
-        sender.shine()
-    }
-    @IBAction func plusMinusButtonDidTouchUpInside(_ sender: UIButton) {
-        temp = temp * (-1)
-        resultLabel.text = printFormatter.string(from: NSNumber(value: temp))
-        sender.shine()
-    }
-    @IBAction func ACButtonDidTouchUpInside(_ sender: UIButton) {
-        clear()
-        sender.shine()
-    }
-    @IBAction func numberButtonDidTouchUpInside(_ sender: UIButton) {
-        ACButton.setTitle("C", for: .normal)
-        var currentTemp = auxFormatter.string(from: NSNumber(value: temp))!
-
-// currentTemp es lo mostramos temporalmente en pantalla ????
-
-        if !operating && currentTemp.count >= kMaxLength {
-            return
-        }
-        
-        // Hemos seleccionado un operador
-        
-        if operating {
-            total = total == 0 ? temp : total
-            resultLabel.text = ""
-            currentTemp = ""
-            operating = false
-        }
-        
-        // Hemos seleccionado decimales
-        
-        if decimal {
-            currentTemp = "\(currentTemp)\(kDecimalSeparator)"
-            decimal = false
-        }
-        
-        let number = sender.tag
-        temp = Double(currentTemp + String(number))!
-        resultLabel.text = printFormatter.string(from: NSNumber(value: temp))
-        
-        sender.shine()
-    }
-    @IBAction func decimalButtonDidTouchUpInside(_ sender: UIButton) {
-        let currentTemp = auxFormatter.string(from: NSNumber(value: temp))!
-        if !operating && currentTemp.count >= kMaxLength {
-            return
-        }
-        resultLabel.text = resultLabel.text! + kDecimalSeparator
-        
-        sender.shine()
-    }
-    
-    // Limpia los valores
     func clear() {
         operation = .none
+        operating = false
         ACButton.setTitle("AC", for: .normal)
         if temp != 0 {
             temp = 0
@@ -233,14 +123,78 @@ class ViewController: UIViewController {
             break
         case .percent:
             temp = temp / 100
-            total = temp
+            total = total * temp
             break
         }
-        // Formato en pantalla
-        if total <= kMaxValue || total >= kMinValue {
-            resultLabel.text = printFormatter.string(from: NSNumber(value: total))
-        }
-        print("TOTAL \(total)")
     }
-}
+    
+    // MARK: IBActions
 
+    @IBAction func resultButtonDidTouchUpInside(_ sender: UIButton) {
+        result()
+        operation = .none
+        operating = false
+        sender.shine()
+        resultLabel.text = "\(total)"
+    }
+    @IBAction func plusButtonDidTouchUpInside(_ sender: UIButton) {
+        operating = true
+        operation = .addiction
+        total = temp
+        temp = 0
+        sender.shine()
+        resultLabel.text = "\(total)"
+    }
+    @IBAction func minusButtonDidTouchUpInside(_ sender: UIButton) {
+        operating = true
+        operation = .substraction
+        total = temp
+        temp = 0
+        sender.shine()
+        resultLabel.text = "\(total)"
+    }
+    @IBAction func multiplyButtonDidTouchUpInside(_ sender: UIButton) {
+        operating = true
+        operation = .multiplication
+        total = temp
+        temp = 0
+        sender.shine()
+        resultLabel.text = "\(total)"
+    }
+    @IBAction func divideButtonDidTouchUpInside(_ sender: UIButton) {
+        operating = true
+        operation = .division
+        total = temp
+        temp = 0
+        sender.shine()
+        resultLabel.text = "\(total)"
+    }
+    @IBAction func percentButtonDidTouchUpInside(_ sender: UIButton) {
+        operating = true
+        operation = .percent
+        total = temp
+        temp = 0
+        sender.shine()
+        resultLabel.text = "\(total)"
+    }
+    @IBAction func plusMinusButtonDidTouchUpInside(_ sender: UIButton) {
+        temp = temp * (-1)
+        resultLabel.text = "\(temp)"
+        sender.shine()
+    }
+    @IBAction func ACButtonDidTouchUpInside(_ sender: UIButton) {
+        clear()
+        sender.shine()
+    }
+    @IBAction func numberButtonDidTouchUpInside(_ sender: UIButton) {
+        ACButton.setTitle("C", for: .normal)
+        temp = Int("\(temp)" + String(sender.tag))!
+        resultLabel.text = "\(temp)"
+        sender.shine()
+    }
+    @IBAction func decimalButtonDidTouchUpInside(_ sender: UIButton) {
+       
+    
+        sender.shine()
+}
+}
